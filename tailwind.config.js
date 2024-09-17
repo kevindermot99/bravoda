@@ -13,6 +13,7 @@ export default {
         "text-black": "#111111",
         "text-white": "#cddddc",
         "dark-card": "#101012",
+        "dark-card-2": "#1d1d21",
         "dark-hover-color": "#1d1d21"
       }
     },
