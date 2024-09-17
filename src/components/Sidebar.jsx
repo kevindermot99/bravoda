@@ -15,6 +15,7 @@ import {
 } from "react-icons/lu";
 import { ConfigProvider, Dropdown } from "antd";
 import SidebarLink from "./SidebarLink";
+import { useLocation } from "react-router-dom";
 
 // Theme configuration
 const lightTheme = {
@@ -28,6 +29,12 @@ const darkTheme = {
   colorTextBase: "#f0f0f0",
   colorBgBase: "#101012",
 };
+
+const SystemtTheme = {
+  colorPrimary: "#581c87",
+  colorTextBase: "#111111",
+  colorBgBase: "#ffffff",
+}
 
 const getStoredTheme = () => {
   return localStorage.getItem("theme") || "system";
@@ -52,6 +59,7 @@ const storeTheme = (theme) => {
 
 function Sidebar() {
   const [defaultTheme, setDefaultTheme] = useState(getStoredTheme());
+  const location = useLocation()
 
   useEffect(() => {
     applyTheme(defaultTheme);
@@ -77,7 +85,7 @@ function Sidebar() {
       key: "1",
       label: (
         <button
-          className="flex items-center justify-start gap-2"
+          className="flex items-center justify-start gap-2 w-full"
           onClick={() => handleThemeChange("light")}
         >
           <span className="text-lg">
@@ -91,7 +99,7 @@ function Sidebar() {
       key: "2",
       label: (
         <button
-          className="flex items-center justify-start gap-2"
+          className="flex items-center justify-start gap-2 w-full"
           onClick={() => handleThemeChange("dark")}
         >
           <span className="text-lg">
@@ -105,7 +113,7 @@ function Sidebar() {
       key: "3",
       label: (
         <button
-          className="flex items-center justify-start gap-2"
+          className="flex items-center justify-start gap-2 w-full"
           onClick={() => handleThemeChange("system")}
         >
           <span className="text-lg">
@@ -185,7 +193,7 @@ function Sidebar() {
       {/* Theme Selector */}
       <div className="h-fit w-full flex flex-col">
         <ConfigProvider
-          theme={{ token: defaultTheme === "light" ? lightTheme : darkTheme }}
+          theme={{ token: defaultTheme === "light" ? lightTheme : defaultTheme === "dark" ? darkTheme : SystemtTheme }}
         >
           <Dropdown menu={{ items }} trigger={["click"]}>
             <button className="flex items-center justify-start gap-2 w-full h-[30px] hover:bg-stone-200 dark:hover:bg-dark-hover-color rounded-lg px-3">
